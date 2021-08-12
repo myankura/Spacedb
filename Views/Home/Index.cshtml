@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    #launchTable {
+        font-size: 14pt;
+        text-align: center;
+        box-shadow: 5px 5px 20px #808080;
+    }
+
+        #launchTable th {
+            background-color: blue;
+            color: white;
+        }
+</style>
+
+<body>
+    <div class="text-center">
+        <h1 class="display-4">Space.db</h1>
+        <p>This project is not associated with NASA or SpaceX. This project leverages the publicly available <a href="https://github.com/r-spacex/SpaceX-API">SpaceX-API</a> & <a href="https://api.nasa.gov/">NASA API</a> for all of it's data</p>
+    </div>
+    <div>
+        <h3>Next Scheduled Launch</h3>
+        @*<div class="custom-control custom-switch" align="right" >
+                <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                <label class="custom-control-label" for="customSwitch1">Convert Payload to Lbs</label>
+            </div>*@
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped table-bordered table-sm" id="launchTable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="th-md" style="text-align: center">Mission Patch</th>
+                        <th class="th-md" style="text-align: center">Launch Window</th>
+                        <th class="th-md" style="text-align: center">Mission</th>
+                        <th class="th-md" style="text-align: center">Rocket Name</th>
+                        <th class="th-md" style="text-align: center">Payload Mass</th>
+                        <th class="th-md" style="text-align: center">Launchpad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @if (ViewBag.launchDetails.SmallPatchUrl != null)
+                        {
+                            <td style="vertical-align: middle">
+                                <img src="@Html.Raw(ViewBag.launchDetails.SmallPatchUrl)" alt="" width="100" height="100">
+                            </td>
+                        }
+                        else
+                        {
+                            <td><!--API returned null.--></td>
+                        }
+                        <td style="vertical-align: middle">
+                            @Formatters.LaunchWindowFormatter(ViewBag.launchDetails.Date)
+                        </td>
+                        <td style="vertical-align: middle">
+                            @ViewBag.launchDetails.MissionName
+                        </td>
+                        <td style="vertical-align: middle">
+                            @ViewBag.launchDetails.Rocket
+                        </td>
+                        <td style="vertical-align: middle">
+                            @Formatters.PayloadFormatter(ViewBag.launchDetails.PayloadWeight)
+                        </td>
+                        <td style="vertical-align: middle">
+                            @Formatters.LaunchpadFormatter(ViewBag.launchDetails.Launchpad)
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</body>
