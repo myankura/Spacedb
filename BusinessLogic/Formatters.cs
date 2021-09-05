@@ -7,6 +7,12 @@ namespace Spacedb.BusinessLogic
 {
     public class Formatters
     {
+        public enum Unit
+        {
+            Lbs,
+            Kgs
+        }
+
         public static string LaunchWindowFormatter(DateTime date)
         {
             return date.ToString("M/d/yyyy h:mm tt");
@@ -37,9 +43,43 @@ namespace Spacedb.BusinessLogic
             if (outcome == true)
                 return "Success!";
             else if (outcome == false)
-                return "RUD";//Rapid Unscheduled Disassembly/shit blew up
+                return "RUD";//Rapid Unscheduled Disassembly
 
             return "TBD";
+        }
+
+        public static string VehicleMassFormatter(double mass, Enum unit) 
+        {
+            if (unit is Unit.Kgs)
+                return string.Format("{0:n0} kgs", mass);
+            else if (unit is Unit.Lbs)
+                return string.Format("({0:n0} lbs)", mass);
+            else
+                //throw new Exception("Error: Unit is not recognized.");
+                return string.Empty;
+        }
+
+        public static string ThrustLbsFormatter(double thrust)
+        {
+            return string.Format("{0:n0} lbs", thrust);
+        }
+
+        public static string StageReusabilityFormatter(bool? reuse)
+        {
+            if (reuse == true)
+                return "Reusable";
+            else
+                return "Non-Reusable";
+        }
+
+        public static string EngineFormatter(string engine, string version)
+        {
+            if (string.IsNullOrWhiteSpace(engine) || engine.Length < 2)
+                return string.Empty;
+
+            //Capitalize first char of engine name and then concatenate the engine version
+            string formattedName = engine[0].ToString().ToUpper() + engine.Substring(1).ToLower();
+            return $"{formattedName} {version}";
         }
     }
 }

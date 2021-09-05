@@ -11,20 +11,23 @@ namespace Spacedb.Models
         public string Name { get; set; }
         public string Height { get; set; }
         public string Diameter { get; set; }
-        public string Mass { get; set; }
-        public object[] FirstStage { get; set; }
-        //second_stage
-        public object[] SecondStage { get; set; }
-        //landing_legs
-        public int LandingLegs { get; set; }
-        //payload_weights
-        public object[] PayloadWeights { get; set; }// = new object[3];
-        //engines/type
+        public double? MassKgs { get; set; }
+        public double? MassLbs { get; set; }
+        public List<string> RocketImageUrls { get; set; }
+        public double? FirstStageSeaLevelThrustLbs { get; set; }
+        public double? FirstStageVacuumThrustLbs { get; set; }
+        public double? SecondStageVacuumThrustLbs { get; set; }
+        public bool? FirstStageReusability { get; set; }
+        public bool? SecondStageReusability { get; set; }
+        public uint? NumberOfLandingLegs { get; set; }
+        public object[] PayloadWeights { get; set; }
         public string EngineName { get; set; }
-        //engines/version
-        public string Version { get; set; }
-        //engines/number
-        public int NumberOfEngines { get; set; }
-        public int MyProperty { get; set; }
+        public string EngineVersion { get; set; }
+        public uint? FirstStageNumOfEngines { get; internal set; }
+        public uint? SecondStageNumOfEngines { get; internal set; }
+        public uint? SpecificImpulseSeaLevel { get; set; }
+        public uint? SpecificImpulseVacuum { get; set; }
+        public string FirstPropellant { get; set; }
+        public string SecondPropellant { get; set; }
     }
 }

@@ -116,3 +116,4 @@ C:\Users\Mike\source\repos\Spacedb\Spacedb\bin\Debug\net5.0\runtimes\win-arm\lib
 C:\Users\Mike\source\repos\Spacedb\Spacedb\bin\Debug\net5.0\runtimes\win-arm64\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
 C:\Users\Mike\source\repos\Spacedb\Spacedb\obj\Debug\net5.0\Razor\Views\Launches\Index.cshtml.g.cs
 C:\Users\Mike\source\repos\Spacedb\Spacedb\obj\Debug\net5.0\Razor\Views\Rockets\Index.cshtml.g.cs
+C:\Users\Mike\source\repos\Spacedb\Spacedb\obj\Debug\net5.0\Razor\Views\Rockets\Details.cshtml.g.cs

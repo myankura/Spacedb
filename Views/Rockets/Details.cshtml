@@ -1,0 +1,131 @@
+﻿@model Spacedb.Models.RocketModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>@ViewBag.selectedRocket.Name Specs</h1>
+
+<div>
+    <hr />
+    <div id="carouselSlideIndicators" class="carousel slide" data-ride="carousel" data-interval="8000">
+        <ol class="carousel-indicators">
+            @for (int i = 0; i < ViewBag.selectedRocket.RocketImageUrls.Count; i++)
+            {
+                <li position="center" data-target="#carouselSlideIndicators" data-slide-to="@i" class="@(ViewBag.selectedRocket.RocketImageUrls[i] == ViewBag.selectedRocket.RocketImageUrls[0] ? "active" : "")"></li>
+            }
+        </ol>
+        <div class="carousel-inner">
+            @for (int j = 0; j < ViewBag.selectedRocket.RocketImageUrls.Count; j++)
+            {
+                <div class="carousel-item @(ViewBag.selectedRocket.RocketImageUrls[j] == ViewBag.selectedRocket.RocketImageUrls[0] ? "active" : "")">
+                    <img src="@Html.Raw(ViewBag.selectedRocket.RocketImageUrls[j])" style="object-fit: cover"/>
+                </div>
+            }
+        </div>
+        @*<a class="carousel-control-prev" href="#carouselSlideIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only"></span>
+        </a>
+        <a class="carousel-control-next" href="#carouselSlideIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only"></span>
+        </a>*@
+    </div>
+
+    <div>
+        <h5>Dimensions/Mass</h5>
+        <dl class="row">
+            <dt >
+                Height: @ViewBag.selectedRocket.Height
+            </dt>
+        </dl>
+        <dl class="row">
+            <dt>
+                Diameter: @ViewBag.selectedRocket.Diameter
+            </dt>
+        </dl>
+        <dl class="row">
+            <dt>
+                Mass: @Formatters.VehicleMassFormatter(@ViewBag.selectedRocket.MassKgs, @Formatters.Unit.Kgs) @Formatters.VehicleMassFormatter(@ViewBag.selectedRocket.MassLbs, @Formatters.Unit.Lbs)
+            </dt>
+        </dl>
+    </div>
+    <div>
+        <h5>First Stage</h5>
+        <dl class="row">
+            <dt>
+                Thrust at Sea Level (lbf): @Formatters.ThrustLbsFormatter(@ViewBag.selectedRocket.FirstStageSeaLevelThrustLbs)
+            </dt>
+        </dl>
+        <dl class="row">
+            <dt>
+                Thrust in Vacuum (lbf): @Formatters.ThrustLbsFormatter(@ViewBag.selectedRocket.FirstStageVacuumThrustLbs)
+            </dt>
+        </dl>
+        <dl class="row">
+            <dt>
+                # of Engines: @ViewBag.selectedRocket.FirstStageNumOfEngines
+            </dt>
+        </dl>
+        <dl class="row">
+            <dt>
+                Reusability: @Formatters.StageReusabilityFormatter(@ViewBag.selectedRocket.FirstStageReusability)
+            </dt>
+        </dl>
+    </div>
+    <div>
+        <h5>Second Stage</h5>
+        <dl class="row">
+            <dt>
+                Thrust in Vacuum (lbf): @Formatters.ThrustLbsFormatter(@ViewBag.selectedRocket.SecondStageVacuumThrustLbs)
+            </dt>
+        </dl>
+        <dl class="row">
+            <dt>
+                Reusability: @Formatters.StageReusabilityFormatter(@ViewBag.selectedRocket.SecondStageReusability)
+            </dt>
+        </dl>
+        <dl class="row">
+            <dt>
+                # of Engines: @ViewBag.selectedRocket.SecondStageNumOfEngines
+            </dt>
+        </dl>
+    </div>
+    <div>
+        <h5>Engine Specs</h5>
+        <dl class="row">
+            <dt>
+                Engine: @Formatters.EngineFormatter(@ViewBag.selectedRocket.EngineName, ViewBag.selectedRocket.EngineVersion)
+            </dt>
+        </dl>
+        <dl class="row">
+            <dt>
+                Specific Impulse (isp) Sea Level: @ViewBag.selectedRocket.SpecificImpulseSeaLevel
+            </dt>
+        </dl>
+        <dl class="row">
+            <dt>
+                Specific Impulse (isp) Vacuum: @ViewBag.selectedRocket.SpecificImpulseVacuum
+            </dt>
+        </dl>
+        <dl class="row">
+            <dt>
+                First Propellant: @ViewBag.selectedRocket.FirstPropellant
+            </dt>
+        </dl>
+        <dl class="row">
+            <dt>
+                Second Propellant: @ViewBag.selectedRocket.SecondPropellant
+            </dt>
+        </dl>
+    </div>
+    <dl class="row">
+        <dt>
+            Number of Landing Legs: @ViewBag.selectedRocket.NumberOfLandingLegs
+        </dt>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>@*Navigates back to /Rockets/Index*@
+</div>

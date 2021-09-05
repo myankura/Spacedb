@@ -1,7 +1,29 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Rockets";
 }
 
-<h1>Index</h1>
-
+<body class="text-white bg-dark mb-3">
+    <div class="text-center">
+        <h1 class="display-4">Space.db</h1>
+    </div>
+    <div>
+        <h3>Rockets</h3>
+    </div>
+    <div class="card-deck">
+        @foreach (var rocket in ViewBag.allRockets)
+        {
+            <div class="card text-white bg-dark mb-3" >
+                <div class="card-body" style="text-align: center">
+                    @*@Html.ActionLink("Rocket to get", "Details", new { id = rocket.Id})*@
+                    <img src="@Html.Raw(rocket.RocketImageUrls[0])" width="220" height="220" style="object-fit: cover">
+                    @*<h4 class ="card-title" asp-action="Details" asp-route-id="@rocket.Id" asp-controller="Rockets">@rocket.Name</h4>*@
+                    <a class="card-title" asp-action="Details" asp-route-id="@rocket.Id" asp-controller="Rockets">@rocket.Name</a>
+                    @*<h4 class="card-title">@rocket.Name</h4>*@
+                    <p class="card-text">Height: @rocket.Height</p>
+                    <p class="card-text">Diameter: @rocket.Diameter</p>
+                    <p class="card-text">Mass: @Formatters.VehicleMassFormatter(rocket.MassKgs, @Formatters.Unit.Kgs) @Formatters.VehicleMassFormatter(rocket.MassLbs, @Formatters.Unit.Lbs)</p>
+                </div>
+            </div>
+        }
+    </div>
+</body>

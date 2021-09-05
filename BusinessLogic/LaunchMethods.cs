@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 
 namespace Spacedb.BusinessLogic
 {
-    public static class LaunchMethods
+    public class LaunchMethods : OddityBase
     {
         public static async Task<List<LaunchModel>> GetAllLaunches()
         {
             try
             {
                 Console.WriteLine("EnterMethod: GetAllLaunches");
-                OddityCore oddity = new OddityCore();
                 var allLaunches = await oddity.LaunchesEndpoint.GetAll().ExecuteAsync();
                 List<LaunchModel> launches = new List<LaunchModel>();
                 foreach (var a in allLaunches)
@@ -50,7 +49,6 @@ namespace Spacedb.BusinessLogic
             try
             {
                 Console.WriteLine("EnterMethod: GetUpcomingLaunch");
-                OddityCore oddity = new OddityCore();
                 var nextLaunch = await oddity.LaunchesEndpoint.GetNext().ExecuteAsync();
                 //Console.WriteLine("Datetime: {0}, Mission Name: {1}, Rocket: {2}, Payload(kg): {3}, Launchpad: {4}, Small patchURL: {5}", nextLaunch.DateUtc.Value.ToLocalTime(), nextLaunch.Name, nextLaunch.Rocket.Value.ToString(), nextLaunch.Payloads[0].Value.MassKilograms, nextLaunch.Launchpad.Value.ToString(), nextLaunch.Links.Patch.Small);
                 LaunchModel next = new LaunchModel
@@ -80,7 +78,6 @@ namespace Spacedb.BusinessLogic
             try
             {
                 Console.WriteLine("EnterMethod: GetLaunchDetails");
-                OddityCore oddity = new OddityCore();
                 var queriedLaunch = await oddity.LaunchesEndpoint.Get(id).ExecuteAsync();
                 LaunchModel launch = new LaunchModel
                 {
@@ -108,7 +105,6 @@ namespace Spacedb.BusinessLogic
             try
             {
                 Console.WriteLine("EnterMethod: GetPastLaunches");
-                OddityCore oddity = new OddityCore();
                 var pastLaunches = await oddity.LaunchesEndpoint.GetPast().ExecuteAsync();
                 List<LaunchModel> launches = new List<LaunchModel>();
                 foreach (var p in pastLaunches)
@@ -144,7 +140,6 @@ namespace Spacedb.BusinessLogic
             try
             {
                 Console.WriteLine("EnterMethod: GetUpcomingLaunches");
-                OddityCore oddity = new OddityCore();
                 var upcomingLaunches = await oddity.LaunchesEndpoint.GetUpcoming().ExecuteAsync();
                 List<LaunchModel> launches = new List<LaunchModel>();
                 foreach (var u in upcomingLaunches)
